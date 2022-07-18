@@ -1,9 +1,36 @@
+# weatherflow-collector-influxdb-loki-grafana
 
+# 🚀 A WeatherFlow data collector for local-UDP, remote-socket, and remote-rest APIs. Feeds InfluxDB and Grafana Loki back-ends. Includes current conditions, forecasts, and historical details. Includes a collection of Grafana Dashboards. 🚀
+
+https://github.com/coding-to-music/weatherflow-collector-influxdb-loki-grafana
+
+From / By Dave Schmid https://github.com/lux4rd0/weatherflow-collector
+
+https://github.com/lux4rd0/weatherflow-collector
+
+https://labs.lux4rd0.com/weatherflow-collector/
+
+## Environment variables:
+
+```java
+
+```
+
+## GitHub
+
+```java
+git init
+git add .
+git remote remove origin
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:coding-to-music/weatherflow-collector-influxdb-loki-grafana.git
+git push -u origin main
+```
 
 ## About The Project
 
 <center><img src="https://labs.lux4rd0.com/wp-content/uploads/2021/05/weatherflow_collector_header.png"></center>
-
 
 **weatherflow-collector** is a set of scripts deployed with Docker that provide multiple ways of collecting data from the [WeatherFlow Tempest](https://weatherflow.com/tempest-weather-system/) weather system. Once deployed, this collection of Grafana dashboards will help you start visualizing that data. If you're just getting started with Grafana, InfluxDB, and WeatherFlow Tempest - you may want to check out my [WeatherFlow Dashboards AIO](https://github.com/lux4rd0/weatherflow-dashboards-aio) (All In One) project.
 
@@ -30,13 +57,13 @@ Use the following [Docker container](https://hub.docker.com/r/lux4rd0/weatherflo
 
     lux4rd0/weatherflow-collector:3.5.1
     lux4rd0/weatherflow-collector:latest
-    
+
     lux4rd0/weatherflow-collector:3.5.1-arm64
     lux4rd0/weatherflow-collector:latest-arm64
-    
+
     lux4rd0/weatherflow-collector:3.5.1-arm
     lux4rd0/weatherflow-collector:latest-arm
-    
+
 Correct environmental variables are required for the container to function. The following script may be used:
 
     generate_docker-compose.sh
@@ -70,6 +97,7 @@ The following files will be generated for you:
 Running `docker-compose up -d' will spin up several containers for each of the types of data collectors (listed below). If you have more than one hub on your account - please edit the `docker-compose.yml` file to only have your hub local to your network. If you have more than one device, those will also be added and can remain.
 
 #### Optional:
+
 #### `remote-import-<<station_name>>.sh`
 
 This script will spin up a docker container to import all of the observed metrics from the WeatherFlow cloud. Having an import function may be helpful if you're starting with this WeatherFlow Collector or if you've reset your InfluxDB database. This script essentially loads whatever is in the WeatherFlow cloud and imports it as your locally collected UDP data. If you have more than one device, a separate import file will be generated for each.
@@ -94,12 +122,12 @@ weatherflow-collector_export-station_351-device_16029.csv
 
 ## Environmental flags:
 
-````WEATHERFLOW_COLLECTOR_BACKEND_TYPE````
+`WEATHERFLOW_COLLECTOR_BACKEND_TYPE`
 
 - influxdb (supports local-udp, remote-rest (forecasts), and remote-socket (observations)
-- loki (supports local-udp and remote-socket (observations) *(Currently disabled)*
+- loki (supports local-udp and remote-socket (observations) _(Currently disabled)_
 
-````WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE````
+`WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE`
 
 - [local-udp](https://weatherflow.github.io/Tempest/api/udp.html)
 - [remote-forecast](https://weatherflow.github.io/Tempest/api/swagger/#/forecast/)
@@ -109,103 +137,101 @@ weatherflow-collector_export-station_351-device_16029.csv
 - remote-import
 - host-performance
 
-````WEATHERFLOW_COLLECTOR_DEBUG````
+`WEATHERFLOW_COLLECTOR_DEBUG`
 
 - false
 - true
 
-````WEATHERFLOW_COLLECTOR_DEVICE_ID````
+`WEATHERFLOW_COLLECTOR_DEVICE_ID`
 
 The Device ID of your Tempest
 
-````WEATHERFLOW_COLLECTOR_FORECAST_INTERVAL````
+`WEATHERFLOW_COLLECTOR_FORECAST_INTERVAL`
 
 How often (in seconds) forecast data is collected from WeatherFlow. Defaults to 60 seconds if not set.
 
-````WEATHERFLOW_COLLECTOR_FUNCTION````
+`WEATHERFLOW_COLLECTOR_FUNCTION`
 
 - collector
 - import
 - export
 
-````WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED````
+`WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED`
 
 - false
 - true
 
 A Docker health check function that runs every 60 seconds. If no data has been collected or persisted to InfluxDB and this parameter is set to true, the docker container will be marked as Unhealthy and terminate. Setting this to false will always return a healthy response to the Docker health check. The health check is included because there may be times where the local UDP listener or remote-socket connection goes silent, and recycling of the container is the only way to get it listening again. You may also find the remote-forecast container takes longer than 60 seconds to complete its hourly forecast transformation. A future update will change the 60 seconds to be a multiple of the interval rate rather than a fixed 60 seconds.
 
-````WEATHERFLOW_COLLECTOR_EXPORT_DAYS````
+`WEATHERFLOW_COLLECTOR_EXPORT_DAYS`
 
 The number of days you want to export to a file from either the WeatherFlow cloud or Grafana Loki.
 
-````WEATHERFLOW_COLLECTOR_HOST_HOSTNAME````
+`WEATHERFLOW_COLLECTOR_HOST_HOSTNAME`
 
 This value represents the hostname that is running the Docker containers. Docker creates a unique hostname each time a docker container is recycled. This entry is used in the management dashboards to know where your collectors are running. It's also helpful if you run the collector across multiple hosts. This value is populated when the `generate_docker-compose.sh` script generates the `docker-compose.yml` file.
 
-````WEATHERFLOW_COLLECTOR_HUB_SN````
+`WEATHERFLOW_COLLECTOR_HUB_SN`
 
 The WeatherFlow Hub serial number.
 
-````WEATHERFLOW_COLLECTOR_IMPORT_DAYS````
+`WEATHERFLOW_COLLECTOR_IMPORT_DAYS`
 
 The number of days you want to import from either the WeatherFlow cloud or Grafana Loki.
 
-````WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD````
+`WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD`
 
 The password for your InfluxDB
 
-````WEATHERFLOW_COLLECTOR_INFLUXDB_URL````
+`WEATHERFLOW_COLLECTOR_INFLUXDB_URL`
 
 The URL connection string for your InfluxDB. For example: http://influxdb:8086/write?db=weatherflow
 
-````WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME````
+`WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME`
 
 The username of your InfluxDB
 
-````WEATHERFLOW_COLLECTOR_LATITUDE````
+`WEATHERFLOW_COLLECTOR_LATITUDE`
 
 The latitude of your WeatherFlow device.
 
-````WEATHERFLOW_COLLECTOR_LOGCLI_URL````
+`WEATHERFLOW_COLLECTOR_LOGCLI_URL`
 
 The URL for your Grafana Loki instance. This parameter is used for importing back from Loki. For example: http://loki.3100/
 
-````WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL````
+`WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL`
 
 The URL connection string for your Grafana Loki endpoint. For example: http://loki:3100/loki/api/v1/push
 
-
-````WEATHERFLOW_COLLECTOR_PERF_INTERVAL````
+`WEATHERFLOW_COLLECTOR_PERF_INTERVAL`
 
 How often (in seconds) the host-performance container polls your host for performance metrics. Defaults to 60 seconds if not set.
 
-
-````WEATHERFLOW_COLLECTOR_REST_INTERVAL````
+`WEATHERFLOW_COLLECTOR_REST_INTERVAL`
 
 How often (in seconds) observation data is collected from WeatherFlow. Defaults to 60 seconds if not set.
 
-````WEATHERFLOW_COLLECTOR_STATION_ID````
+`WEATHERFLOW_COLLECTOR_STATION_ID`
 
 The Station ID of your Tempest
 
-````WEATHERFLOW_COLLECTOR_STATION_NAME````
+`WEATHERFLOW_COLLECTOR_STATION_NAME`
 
 The Station Name of your WeatherFlow device.
 
-````WEATHERFLOW_COLLECTOR_THREADS````
+`WEATHERFLOW_COLLECTOR_THREADS`
 
 The number of threads used when populating the Forecast Hourly details or importing WeatherFlow Cloud or Grafana Loki logs. Defaults to 4 threads if not set. This likely should align with the number of CPUs that you have.
 
-````WEATHERFLOW_COLLECTOR_TOKEN````
+`WEATHERFLOW_COLLECTOR_TOKEN`
 
 The WeatherFlow Personal Access Token.
 
-#### *Note - If a change is made to the location details of your WeatherFlow device (such as station name, public name, longitude, latitude, etc.) - please rerun the `generate_docker-compose.sh` script or manually update the environmental variables to match.*
+#### _Note - If a change is made to the location details of your WeatherFlow device (such as station name, public name, longitude, latitude, etc.) - please rerun the `generate_docker-compose.sh` script or manually update the environmental variables to match._
 
 ## Obtaining Your Tempest Authentication Token
 
- You can obtain this by signing in to the Tempest Web App at [tempestwx.com](https://tempestwx.com/), then go to Settings -> Data Authorizations -> Create Token.
+You can obtain this by signing in to the Tempest Web App at [tempestwx.com](https://tempestwx.com/), then go to Settings -> Data Authorizations -> Create Token.
 
 ## Collector Details
 
@@ -223,7 +249,7 @@ This setting provides a listener on UDP port 50222 for messages coming from your
 
 #### remote-forecast
 
-This setting populates the WeatherFlow Forecast dashboards by polling the daily and hourly forecasts for your location and stores them in InfluxDB. The forecasting process runs on startup and every quarter-hour - 00, 15, 30, and 45 minutes 
+This setting populates the WeatherFlow Forecast dashboards by polling the daily and hourly forecasts for your location and stores them in InfluxDB. The forecasting process runs on startup and every quarter-hour - 00, 15, 30, and 45 minutes
 
 #### remote-import
 
@@ -289,7 +315,7 @@ Provides a place to view weather details over longer periods of time. It default
 
 <center><img src="./images/weatherflow_collector-historical_remote.jpg"></center>
 
-Provides a place to view weather details over longer periods of time. It defaults to 30 days with a 12-hour interval to show highs and lows for each of the Air Temperature, Humidity, Station Pressure, Solar, and Wind metrics. Includes [derived metrics](https://weatherflow.github.io/Tempest/api/derived-metric-formulas.html)  as well such as Feels Like, Heat Index, Wind Chill, Dry Bulb, Wet Bulb, and Dew Point. Precipitation Accumulation is displayed for any days that precipitation is detected.
+Provides a place to view weather details over longer periods of time. It defaults to 30 days with a 12-hour interval to show highs and lows for each of the Air Temperature, Humidity, Station Pressure, Solar, and Wind metrics. Includes [derived metrics](https://weatherflow.github.io/Tempest/api/derived-metric-formulas.html) as well such as Feels Like, Heat Index, Wind Chill, Dry Bulb, Wet Bulb, and Dew Point. Precipitation Accumulation is displayed for any days that precipitation is detected.
 
 ### Overview - [14383](https://grafana.com/grafana/dashboards/14383)
 
@@ -315,9 +341,9 @@ Provides for two different system metrics to understand the health of your weath
 
 The second section shows how long it's taking to receive and persist forecasts and observations.
 
- - **Forecast Build Duration** - Daily - between 1 and 2 seconds
- - **Forecast Build Duration** - Hourly - between 30 and 45 seconds (note - if this takes longer than 60 seconds, the Docker Health Check will currently recycle the container. A future update will change this to take a longer build duration into account. For now - set the "WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED" environmental variable to "false".
- - **Rest Observations** - between 1 and 2 seconds
+- **Forecast Build Duration** - Daily - between 1 and 2 seconds
+- **Forecast Build Duration** - Hourly - between 30 and 45 seconds (note - if this takes longer than 60 seconds, the Docker Health Check will currently recycle the container. A future update will change this to take a longer build duration into account. For now - set the "WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED" environmental variable to "false".
+- **Rest Observations** - between 1 and 2 seconds
 
 ### Today So Far (local-udp) - [14386](https://grafana.com/grafana/dashboards/14386)
 
@@ -337,7 +363,7 @@ The data collector and dashboards support multiple WeatherFlow Tempest devices.
 
 ### Time Zone Variable
 
-A TZ variable is required when running the Docker containers. (It's populated automatically from the `generate_docker-compose.sh` scripts) 
+A TZ variable is required when running the Docker containers. (It's populated automatically from the `generate_docker-compose.sh` scripts)
 
 TZ is specific to each hub/device location and is required as part of the InluxDB query to identify day breaks and other 12/24 hour interval groups. For dashboards with multiple devices in different time zones, you may need to switch the time zones from the top drop-down to correctly group midnight/noon periods.
 

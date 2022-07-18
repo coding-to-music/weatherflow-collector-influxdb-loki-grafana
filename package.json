@@ -1,0 +1,21 @@
+{
+  "name": "weatherflow-collector-influxdb-loki-grafana",
+  "version": "1.0.0",
+  "description": "<center><img src=\"https://labs.lux4rd0.com/wp-content/uploads/2021/05/weatherflow_collector_header.png\"></center>",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "git add . && git commit -m Build && git push",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lux4rd0/weatherflow-collector.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lux4rd0/weatherflow-collector/issues"
+  },
+  "homepage": "https://github.com/lux4rd0/weatherflow-collector#readme"
+}
