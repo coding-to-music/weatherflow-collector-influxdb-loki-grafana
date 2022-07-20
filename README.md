@@ -96,6 +96,73 @@ The following files will be generated for you:
 
 Running `docker-compose up -d' will spin up several containers for each of the types of data collectors (listed below). If you have more than one hub on your account - please edit the `docker-compose.yml` file to only have your hub local to your network. If you have more than one device, those will also be added and can remain.
 
+## Result of trying to generate the docker-compose.yaml
+
+```java
+ WEATHERFLOW_COLLECTOR_IMPORT_DAYS="365" \
+> WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD="4L851Jtjaasdset7AJoFasdoFYR3di5Zniew28" \
+> WEATHERFLOW_COLLECTOR_INFLUXDB_URL="http://influxdb01.com:8086/write?db=weatherflow" \
+> WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME="influxdb" \
+> WEATHERFLOW_COLLECTOR_PERF_INTERVAL="60" \
+> WEATHERFLOW_COLLECTOR_THREADS="4" \
+> WEATHERFLOW_COLLECTOR_TOKEN="a22afsa7-0dcc-4918-9f9a-923dfd339f41c" \
+> bash ./generate_docker-compose.sh
+```
+
+Output
+
+```java
+ █     █░▓█████ ▄▄▄     ▄▄▄█████▓ ██░ ██ ▓█████  ██▀███    █████▒██▓     ▒█████   █     █░
+▓█░ █ ░█░▓█   ▀▒████▄   ▓  ██▒ ▓▒▓██░ ██▒▓█   ▀ ▓██ ▒ ██▒▓██   ▒▓██▒    ▒██▒  ██▒▓█░ █ ░█░
+▒█░ █ ░█ ▒███  ▒██  ▀█▄ ▒ ▓██░ ▒░▒██▀▀██░▒███   ▓██ ░▄█ ▒▒████ ░▒██░    ▒██░  ██▒▒█░ █ ░█
+░█░ █ ░█ ▒▓█  ▄░██▄▄▄▄██░ ▓██▓ ░ ░▓█ ░██ ▒▓█  ▄ ▒██▀▀█▄  ░▓█▒  ░▒██░    ▒██   ██░░█░ █ ░█
+░░██▒██▓ ░▒████▒▓█   ▓██▒ ▒██▒ ░ ░▓█▒░██▓░▒████▒░██▓ ▒██▒░▒█░   ░██████▒░ ████▓▒░░░██▒██▓
+░ ▓░▒ ▒  ░░ ▒░ ░▒▒   ▓▒█░ ▒ ░░    ▒ ░░▒░▒░░ ▒░ ░░ ▒▓ ░▒▓░ ▒ ░   ░ ▒░▓  ░░ ▒░▒░▒░ ░ ▓░▒ ▒
+  ▒ ░ ░   ░ ░  ░ ▒   ▒▒ ░   ░     ▒ ░▒░ ░ ░ ░  ░  ░▒ ░ ▒░ ░     ░ ░ ▒  ░  ░ ▒ ▒░   ▒ ░ ░
+  ░   ░     ░    ░   ▒    ░       ░  ░░ ░   ░     ░░   ░  ░ ░     ░ ░   ░ ░ ░ ▒    ░   ░
+    ░       ░  ░     ░  ░         ░  ░  ░   ░  ░   ░                ░  ░    ░ ░      ░
+
+       ▄████▄   ▒█████   ██▓     ██▓    ▓█████  ▄████▄  ▄▄▄█████▓ ▒█████   ██▀███
+      ▒██▀ ▀█  ▒██▒  ██▒▓██▒    ▓██▒    ▓█   ▀ ▒██▀ ▀█  ▓  ██▒ ▓▒▒██▒  ██▒▓██ ▒ ██▒
+      ▒▓█    ▄ ▒██░  ██▒▒██░    ▒██░    ▒███   ▒▓█    ▄ ▒ ▓██░ ▒░▒██░  ██▒▓██ ░▄█ ▒
+      ▒▓▓▄ ▄██▒▒██   ██░▒██░    ▒██░    ▒▓█  ▄ ▒▓▓▄ ▄██▒░ ▓██▓ ░ ▒██   ██░▒██▀▀█▄
+      ▒ ▓███▀ ░░ ████▓▒░░██████▒░██████▒░▒████▒▒ ▓███▀ ░  ▒██▒ ░ ░ ████▓▒░░██▓ ▒██▒
+      ░ ░▒ ▒  ░░ ▒░▒░▒░ ░ ▒░▓  ░░ ▒░▓  ░░░ ▒░ ░░ ░▒ ▒  ░  ▒ ░░   ░ ▒░▒░▒░ ░ ▒▓ ░▒▓░
+        ░  ▒     ░ ▒ ▒░ ░ ░ ▒  ░░ ░ ▒  ░ ░ ░  ░  ░  ▒       ░      ░ ▒ ▒░   ░▒ ░ ▒░
+      ░        ░ ░ ░ ▒    ░ ░     ░ ░      ░   ░          ░      ░ ░ ░ ▒    ░░   ░
+      ░ ░          ░ ░      ░  ░    ░  ░   ░  ░░ ░                   ░ ░     ░
+      ░                                        ░
+
+WeatherFlow Collector (generate_docker-compose.sh) - https://github.com/lux4rd0/weatherflow-collector
+
+collector_key=a22afsa7 (using partial API key)
+import_days=365
+influxdb_password=4L851Jtjaasdset7AJoFasdoFYR3di5Zniew28
+influxdb_url=http://influxdb01.com:8086/write?db=weatherflow
+influxdb_username=influxdb
+logcli_host_url=
+loki_client_url=
+threads=4
+token=a22afsa7-0dcc-4918-9f9a-923dfd339f41c
+
+weatherflow-collector: Number of Stations: 0
+weatherflow-collector: /mnt/volume_nyc1_01/weatherflow-collector-influxdb-loki-grafana/docker-compose.yml file created
+```
+
+```
+docker-compose up
+```
+
+Output
+
+```java
+ERROR:
+        Can't find a suitable configuration file in this directory or any
+        parent. Are you in the right directory?
+
+        Supported filenames: docker-compose.yml, docker-compose.yaml
+```
+
 #### Optional:
 
 #### `remote-import-<<station_name>>.sh`
